@@ -1,0 +1,39 @@
+﻿@model ProductSearch
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>New Product</h2>
+        </div>
+    </div>
+</div>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" class="form-control"/>
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        OR
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary form-btn-size">Search</button>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-secondary form-btn-size">Back to List</a>
+</form>
+
+<partial name="_SuccessMessagePartial" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

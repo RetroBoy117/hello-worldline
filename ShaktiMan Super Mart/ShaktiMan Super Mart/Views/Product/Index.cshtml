@@ -1,0 +1,71 @@
+﻿@model List<Product>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Student List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                Create New Student
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_SuccessMessagePartial" />
+<table class = "table table-striped table table-hover table-bordered" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>&nbsp;</th>
+    </tr>
+        @foreach(var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>
+                <div class="btn-group">
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" 
+                       class="btn btn-primary row-btn-size">Edit</a>
+
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" 
+                       class="btn btn-danger row-btn-size"
+                       onclick="confirmDelete2(@product.Id, this.href); return false;">Delete</a>
+                </div>
+            </td>
+            </tr>
+        }
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function confirmDelete(id) {
+            return confirm("Do you really want to delete Student with id: " + id);
+        }
+
+        function confirmDelete2(id, href) {
+            Swal.fire({
+                title: "Do you really want to delete Student with id: " + id,
+                showCancelButton: true,
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href;
+                }
+            })
+        }
+
+    </script>
+}
